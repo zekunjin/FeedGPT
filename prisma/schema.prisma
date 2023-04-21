@@ -7,9 +7,10 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:../db/feed_gpt.db"
+  url      = "file:dev.db"
 }
 
 model Conversation {
-  id  Int     @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
+  title     String
 }
