@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const message = ref('message')
+const message = ref('')
 </script>
 
 <template>
@@ -8,9 +8,9 @@ const message = ref('message')
       <ConversationSelector />
 
       <div class="flex-1 flex flex-col bg-neutral-600 text-white">
-        <div class="flex-1">{{ message }}</div>
-        <div>
-          <ConversationInput v-model:value="message" />
+        <div class="flex-1 w-full overflow-x-hidden">{{ message }}</div>
+        <div class="flex justify-center py-14">
+          <ConversationInput v-model:value="message" class="max-w-4xl" />
         </div>
       </div>
     </div>
