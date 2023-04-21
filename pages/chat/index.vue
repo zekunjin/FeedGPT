@@ -7,7 +7,7 @@ const message = ref('message')
     <div class="flex h-full w-full">
       <ConversationSelector />
 
-      <div class="flex-1 bg-neutral-300">
+      <div class="flex-1 bg-neutral-600 text-white">
         <div>{{ message }}</div>
       </div>
     </div>
