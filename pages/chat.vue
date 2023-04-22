@@ -9,6 +9,10 @@ const { data } = useLazyFetch('/api/conversations')
 const isActive = (id: string) => {
   return id === route.params.id
 }
+
+const onSend = async () => {
+
+}
 </script>
 
 <template>
@@ -24,7 +28,7 @@ const isActive = (id: string) => {
             <NuxtPage />
           </div>
           <div class="flex justify-center py-14">
-            <ConversationInput v-model:value="message" />
+            <ConversationInput v-model:value="message" @send="onSend" />
           </div>
         </div>
       </div>
