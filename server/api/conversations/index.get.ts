@@ -1,3 +1,6 @@
-export default defineEventHandler((event) => {
-  return { data: 'success' }
+
+import prisma from '~/server/utils/prisma'
+
+export default defineEventHandler(() => {
+  return prisma.conversation.findMany()
 })

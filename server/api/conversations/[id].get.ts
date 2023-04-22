@@ -1,3 +1,6 @@
+
+import prisma from '~/server/utils/prisma'
+
 export default defineEventHandler((event) => {
-  return { data: 'success' }
+  return prisma.conversation.findUnique({ where: { id: Number(event.context.params?.id) } })
 })
