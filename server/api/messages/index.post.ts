@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     conversationId?: number
   } = await readBody(event)
 
-  let conversationId = query.conversationId || 0
+  let conversationId = query.conversationId as number
 
   if (!query.conversationId) {
     const { id } = await prisma.conversation.create({
