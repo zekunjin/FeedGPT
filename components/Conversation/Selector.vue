@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps<{
+defineProps<{
   value?: string
 }>()
 </script>
@@ -10,7 +10,6 @@ const props = defineProps<{
       New chat
     </ConversationNewBtn>
 
-    <div class="flex-1 overflow-y-auto">
-    </div>
+    <div class="flex-1 overflow-y-auto" />
   </div>
 </template>

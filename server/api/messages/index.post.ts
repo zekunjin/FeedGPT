@@ -1,18 +1,17 @@
-
 import prisma from '~/server/utils/prisma'
 
 export default defineEventHandler(async (event) => {
   const query: {
     input: string
-    conversationId?: number
+    conversationId?: string
     authorRole?: 'user' | 'system'
   } = await readBody(event)
 
-  let conversationId = query.conversationId as number
+  let conversationId = query.conversationId as string
 
   if (!query.conversationId) {
     const { id } = await prisma.conversation.create({
-      data: { title: 'New chat', storeId: 0 }
+      data: { title: 'New chat' }
     })
     conversationId = id
   }
