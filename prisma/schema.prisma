@@ -13,7 +13,7 @@ datasource db {
 model Conversation {
   id        Int       @id @default(autoincrement())
   title     String
-  storeId   Int?
+  storeId   Int?      @default(0)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -21,7 +21,7 @@ model Conversation {
 model Message {
   id              Int       @id @default(autoincrement())
   content         String
-  authorRole      String    @default("user")
+  authorRole      String?   @default("user")
   conversationId  Int
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt

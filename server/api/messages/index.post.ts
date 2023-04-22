@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
   const query: {
     input: string
     conversationId?: number
+    authorRole?: 'user' | 'system'
   } = await readBody(event)
 
   let conversationId = query.conversationId as number
@@ -17,6 +18,6 @@ export default defineEventHandler(async (event) => {
   }
 
   return prisma.message.create({
-    data: { content: query.input, conversationId, authorRole: 'user' }
+    data: { content: query.input, conversationId, authorRole: query.authorRole ?? 'user' }
   })
 })
