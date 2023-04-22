@@ -1,13 +1,11 @@
 
 import prisma from '~/server/utils/prisma'
 
-export interface SendMessage {
-  input: string
-  conversationId?: number
-}
-
 export default defineEventHandler(async (event) => {
-  const query: SendMessage = await readBody(event)
+  const query: {
+    input: string
+    conversationId?: number
+  } = await readBody(event)
 
   let conversationId = query.conversationId || 0
 
