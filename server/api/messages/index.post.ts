@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     authorRole?: 'user' | 'system'
   } = await readBody(event)
 
-  let conversationId = query.conversationId as string
+  let conversationId = query.conversationId
 
   if (!query.conversationId) {
     const { id } = await prisma.conversation.create({
@@ -15,6 +15,8 @@ export default defineEventHandler(async (event) => {
     })
     conversationId = id
   }
+
+  if (!conversationId) { throw new Error() }
 
   return prisma.message.create({
     data: { content: query.input, conversationId, authorRole: query.authorRole ?? 'user' }
