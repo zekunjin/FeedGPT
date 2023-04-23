@@ -19,9 +19,8 @@ const v = computed({
 
 <template>
   <div class="relative w-full">
-    <textarea
+    <input
       v-model="v"
-      rows="1"
       placeholder="Send a messasge ..."
       class="block w-full border-gray-300 shadow text-base rounded-lg pl-4 pr-7 py-3 bg-neutral-500 hover:shadow-lg focus:shadow-lg focus-visible:outline-none duration-300"
     />
