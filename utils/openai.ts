@@ -23,6 +23,20 @@ export interface ChatCompletionResponse {
   }
 }
 
+export interface CreateEmbeddingsResponse {
+  object: string
+  data: {
+    object: string
+    embedding: number[]
+    index: number
+  }[]
+  model: string
+  usage: {
+    prompt_tokens: number
+    total_tokens: number
+  }
+}
+
 export const chatCompletions = async (messages: ChatCompletionMessage[]) => {
   const data: ChatCompletionResponse = await $fetch('/v1/chat/completions', {
     baseURL: OPENAI_BASE_URL,
@@ -31,6 +45,21 @@ export const chatCompletions = async (messages: ChatCompletionMessage[]) => {
     body: {
       model: 'gpt-3.5-turbo',
       messages
+    }
+  })
+
+  return data
+}
+
+
+export const createEmbeddings = async (input: string | string[]) => {
+  const data: CreateEmbeddingsResponse = await $fetch('/v1/embeddings', {
+    baseURL: OPENAI_BASE_URL,
+    method: 'post',
+    headers: { Authorization: "Bearer " + process.env.OPENAI_API_KEY },
+    body: {
+      model: 'text-embedding-ada-002',
+      input
     }
   })
 

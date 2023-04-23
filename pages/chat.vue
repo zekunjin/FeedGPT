@@ -23,7 +23,7 @@ const onDeleteConversation = async ({ id }: { id: string }) => {
 
 const onSendMessage = async () => {
   if (!message.value) { return }
-  const data = await send(message.value, route.params.id as string)
+  const data = await send(message.value, route.params.id as string, route.query.storeId as string)
   if (!conversationId.value) { execute() }
   router.push({ name: 'chat-id', params: { id: data.conversationId } })
   message.value = ''
@@ -34,7 +34,7 @@ const onSendMessage = async () => {
   <NuxtLayout>
     <div class="flex h-full w-full">
       <ConversationSelector>
-        <ConversationSelectorItem v-for="item in data" :key="item.id" v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id } })" @save="onSaveConversation($event, item)" @delete="onDeleteConversation(item)" />
+        <ConversationSelectorItem v-for="item in data" :key="item.id" v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id }, query: { storeId: item.storeId } })" @save="onSaveConversation($event, item)" @delete="onDeleteConversation(item)" />
       </ConversationSelector>
 
       <div class="flex-1 flex justify-center w-full bg-neutral-700 text-white">

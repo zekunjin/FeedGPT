@@ -10,6 +10,12 @@ interface ScoreItem {
 }
 
 
+const route = useRoute()
+const storeId = computed(() => route.params.id as string)
+
+const { data } = useLazyFetch(`/api/stores/${storeId.value}/sentences`)
+
+
 
 const scores = ref<ScoreItem[]>([])
 
@@ -30,6 +36,6 @@ scores.value = src.map((oldEmbedding, index) => {
 
 <template>
   <div>
-    {{ scores.sort(({ score: a }, { score: b }) => b - a) }}
+    <div v-for="item in data" :key="item.id">{{ item.content }}</div>
   </div>
 </template>

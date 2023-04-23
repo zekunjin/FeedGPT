@@ -13,7 +13,7 @@ export const useConversataionStore = defineStore('conversation', {
   }),
     
   actions: {
-    async send(input: string, conversationId?: string) {
+    async send(input: string, conversationId?: string, storeId?: string) {
       const data = await $fetch('/api/messages', { method: 'post', body: { input, conversationId, authorRole: AuthorRole.USER } })
 
       if (conversationId) { 
@@ -22,6 +22,10 @@ export const useConversataionStore = defineStore('conversation', {
 
       if (!conversationId) {
         await this.getConversationMessages(data.conversationId)
+      }
+
+      if (storeId) {
+        const sentences = await $fetch(`/api/stores/${storeId}/sentences`)
       }
 
       const { choices } = await chatCompletions(this.conversations[data.conversationId].filter(({ authorRole }) => isUserAuthorRole(authorRole)).map(({ content }) => ({
