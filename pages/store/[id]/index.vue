@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import * as tf from '@tensorflow/tfjs'
-import { data as e } from './embeddings.json'
-import { data as i } from './input.json'
+import { data as e } from '../embeddings.json'
+import { data as i } from '../input.json'
 
 
 interface ScoreItem {
@@ -29,7 +29,7 @@ scores.value = src.map((oldEmbedding, index) => {
 </script>
 
 <template>
-  <NuxtLayout>
+  <div>
     {{ scores.sort(({ score: a }, { score: b }) => b - a) }}
-  </NuxtLayout>
+  </div>
 </template>
