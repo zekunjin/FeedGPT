@@ -5,5 +5,7 @@ const { data } = useLazyFetch(`/api/conversations/${route.params.id}/messages`)
 </script>
 
 <template>
-  <div>{{ data }}</div>
+  <div>
+    <div v-for="item in data" :key="item.id">{{ item.content }}</div>
+  </div>
 </template>
