@@ -15,6 +15,10 @@ const v = computed({
     emit('update:value', value)
   }
 })
+
+const onSend = () => {
+  emit('send', props.value)
+}
 </script>
 
 <template>
@@ -25,6 +29,6 @@ const v = computed({
       class="block w-full border-gray-300 shadow text-base rounded-lg pl-4 pr-7 py-3 bg-neutral-500 hover:shadow-lg focus:shadow-lg focus-visible:outline-none duration-300"
     />
 
-    <SendAlt class="absolute right-2 bottom-3 cursor-pointer" @click="emit('send', value)" />
+    <SendAlt class="absolute right-2 bottom-1/2 translate-y-1/2 cursor-pointer" @click="onSend" />
   </div>
 </template>

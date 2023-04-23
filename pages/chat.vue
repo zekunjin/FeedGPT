@@ -4,7 +4,8 @@ const message = ref('')
 const route = useRoute()
 const router = useRouter()
 
-const { data } = useLazyFetch('/api/conversations')
+const { data, execute } = useLazyFetch('/api/conversations')
+const { send } = useConversataionStore()
 
 const isActive = (id: string) => {
   return id === route.params.id
@@ -14,8 +15,15 @@ const onSaveConversation = async (value: string, { id }: { id: string }) => {
   await useFetch(`/api/conversations/${id}`, { method: 'put', body: { title: value } })
 }
 
-const onSend = async () => {
+const onDeleteConversation = async ({ id }: { id: string }) => {
+  await useFetch(`/api/conversations/${id}`, { method: 'delete' })
+  execute()
+}
 
+const onSendMessage = async () => {
+  const data = await send(message.value, route.params.id as string)
+  router.push({ name: 'chat-id', params: { id: data.conversationId } })
+  message.value = ''
 }
 </script>
 
@@ -23,7 +31,7 @@ const onSend = async () => {
   <NuxtLayout>
     <div class="flex h-full w-full">
       <ConversationSelector>
-        <ConversationSelectorItem v-for="item in data" :key="item.id" v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id } })" @save="onSaveConversation($event, item)" />
+        <ConversationSelectorItem v-for="item in data" :key="item.id" v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id } })" @save="onSaveConversation($event, item)" @delete="onDeleteConversation(item)" />
       </ConversationSelector>
 
       <div class="flex-1 flex justify-center w-full bg-neutral-600 text-white">
@@ -32,7 +40,7 @@ const onSend = async () => {
             <NuxtPage />
           </div>
           <div class="flex justify-center py-14">
-            <ConversationInput v-model:value="message" @send="onSend" />
+            <ConversationInput v-model:value="message" @send="onSendMessage" />
           </div>
         </div>
       </div>

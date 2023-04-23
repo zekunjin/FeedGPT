@@ -1,11 +1,14 @@
 <script setup lang="ts">
 const route = useRoute()
+const { conversations, getConversationMessages } = useConversataionStore()
 
-const { data } = useLazyFetch(`/api/conversations/${route.params.id}/messages`)
+const conversationId = computed(() => route.params.id as string)
+
+getConversationMessages(conversationId.value)
 </script>
 
 <template>
   <div>
-    <div v-for="item in data" :key="item.id">{{ item.content }}</div>
+    <div v-for="item, index in conversations[conversationId]" :key="index">{{ item }}</div>
   </div>
 </template>
