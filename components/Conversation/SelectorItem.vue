@@ -43,7 +43,7 @@ const toggleEdit = () => {
       </div>
     </div>
 
-    <div class="flex items-center gap-2 text-xs text-white/50">
+    <div v-show="isActive" class="flex items-center gap-2 text-xs text-white/50">
       <component :is="isEdit ? EditOff : Edit" class="hover:text-white duration-300" @click="toggleEdit" />
       <TrashCan class="hover:text-white duration-300" @click="emit('delete')" />
     </div>
