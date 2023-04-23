@@ -7,8 +7,6 @@ export interface ConversationStoreState {
   }[]>
 }
 
-export const isUserAuthorRole = (role: string): role is 'user' => role === AuthorRole.USER
-
 export const useConversataionStore = defineStore('conversation', {
   state: (): ConversationStoreState => ({
     conversations: {}
