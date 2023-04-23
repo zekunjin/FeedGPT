@@ -14,7 +14,7 @@ const onCreateStore = async () => {
 }
 
 const onSaveStore = async (value: string, { id }: { id: string }) => {
-  await useFetch(`/api/conversations/${id}`, { method: 'put', body: { title: value } })
+  await useFetch(`/api/stores/${id}`, { method: 'put', body: { name: value } })
 }
 
 const onDeleteStore = async ({ id }: { id: string }) => {
