@@ -22,6 +22,7 @@ const onDeleteConversation = async ({ id }: { id: string }) => {
 }
 
 const onSendMessage = async () => {
+  if (!message.value) { return }
   const data = await send(message.value, route.params.id as string)
   if (!conversationId.value) { execute() }
   router.push({ name: 'chat-id', params: { id: data.conversationId } })
