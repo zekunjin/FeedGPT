@@ -42,7 +42,7 @@ const onSendMessage = async () => {
           <div class="flex-1 w-full overflow-x-hidden">
             <NuxtPage />
           </div>
-          <div class="flex justify-center py-14 mx-auto md:w-full lg:max-w-3xl ">
+          <div class="flex justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
             <ConversationInput v-model:value="message" @send="onSendMessage" />
           </div>
         </div>
