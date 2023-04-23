@@ -23,7 +23,7 @@ const onSend = async () => {
   <NuxtLayout>
     <div class="flex h-full w-full">
       <ConversationSelector>
-        <ConversationSelectorItem v-for="item in data" :key="item.id" :title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id } })" @save="onSaveConversation($event, item)" />
+        <ConversationSelectorItem v-for="item in data" :key="item.id" v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id } })" @save="onSaveConversation($event, item)" />
       </ConversationSelector>
 
       <div class="flex-1 flex justify-center w-full bg-neutral-600 text-white">
