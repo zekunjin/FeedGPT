@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
   isActive?: boolean
 }>(), { isActive: false })
 
-const emit = defineEmits(['click', 'delete'])
+const emit = defineEmits(['click', 'delete', 'save'])
 
 const isEdit = ref(false)
 const inputTitle = ref('')
@@ -22,6 +22,10 @@ const toggleEdit = () => {
 
   if (isEdit.value) {
     inputTitle.value = props.title
+  }
+
+  if (!isEdit.value) {
+    emit('save', inputTitle.value)
   }
 }
 </script>
