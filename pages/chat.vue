@@ -37,12 +37,12 @@ const onSendMessage = async () => {
         <ConversationSelectorItem v-for="item in data" :key="item.id" v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id } })" @save="onSaveConversation($event, item)" @delete="onDeleteConversation(item)" />
       </ConversationSelector>
 
-      <div class="flex-1 flex justify-center w-full bg-neutral-600 text-white">
-        <div class="flex flex-col px-4 md:min-w-full lg:min-w-[56rem]">
-          <div class="flex-1 w-full overflow-x-hidden max-w-4xl">
+      <div class="flex-1 flex justify-center w-full bg-neutral-700 text-white">
+        <div class="w-full flex flex-col">
+          <div class="flex-1 w-full overflow-x-hidden">
             <NuxtPage />
           </div>
-          <div class="flex justify-center py-14">
+          <div class="flex justify-center py-14 mx-auto md:w-full lg:max-w-3xl ">
             <ConversationInput v-model:value="message" @send="onSendMessage" />
           </div>
         </div>

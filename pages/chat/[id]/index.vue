@@ -11,11 +11,13 @@ getConversationMessages(conversationId.value)
 </script>
 
 <template>
-  <div class="flex flex-col gap-8 select-none py-8">
-    <div v-for="item, index in conversations[conversationId]" :key="index" class="flex gap-4" :class="{ 'flex-row-reverse': isUserAuthorRole(item.authorRole) }">
-      <component :is="isUserAuthorRole(item.authorRole) ? AvatarQuestion : AvatarAnswer" class="shrink-0" />
-      <div class="py-2 px-4 rounded-lg bg-white/5 leading-7 max-w-2xl text-white/80">
-        {{ item.content }}
+  <div class="flex flex-col select-none pb-8 w-full">
+    <div v-for="item, index in conversations[conversationId]" :key="index" :class="{ 'bg-neutral-600': !isUserAuthorRole(item.authorRole) }">
+      <div class="flex gap-4 py-4 max-w-3xl mx-auto">
+        <component :is="isUserAuthorRole(item.authorRole) ? AvatarQuestion : AvatarAnswer" class="shrink-0" />
+        <div class="py-1 px-4 rounded-lg leading-7 text-white/80">
+          {{ item.content }}
+        </div>
       </div>
     </div>
   </div>
