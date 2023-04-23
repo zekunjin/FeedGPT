@@ -8,7 +8,7 @@ getConversationMessages(conversationId.value)
 </script>
 
 <template>
-  <div>
-    <div v-for="item, index in conversations[conversationId]" :key="index">{{ item }}</div>
+  <div class="flex flex-col gap-2">
+    <div v-for="item, index in conversations[conversationId]" :key="index">{{ item.content }}</div>
   </div>
 </template>
