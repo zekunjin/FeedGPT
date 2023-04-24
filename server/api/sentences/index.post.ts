@@ -1,10 +1,17 @@
 import prisma from '~/server/utils/prisma'
 
-export default defineEventHandler(async (event) => {
-  const query: {
-    content: string
-    vector: string
-  } = await readBody(event)
+interface QueryBody {
+  content: string
+  vector: string
+  storeId: string
+}
 
-  return prisma.sentence.create({ data: { content: query.content, vector: query.vector, storeId: event.context.params?.id } })
+export default defineEventHandler(async (event) => {
+  const query: QueryBody | QueryBody[] = await readBody(event)
+
+  if (Array.isArray(query)) {
+    return Promise.all(query.map(data => prisma.sentence.create({ data }))) 
+  }
+
+  return prisma.sentence.create({ data: query })
 })
