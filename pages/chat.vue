@@ -23,10 +23,12 @@ const onDeleteConversation = async ({ id }: { id: string }) => {
 
 const onSendMessage = async () => {
   if (!message.value) { return }
-  const data = await send(message.value, route.params.id as string, route.query.storeId as string)
+  const params = message.value
+  message.value = ''
+  const data = await send(params, route.params.id as string, route.query.storeId as string)
   if (!conversationId.value) { execute() }
   router.push({ name: 'chat-id', params: { id: data.conversationId } })
-  message.value = ''
+  
 }
 </script>
 
@@ -38,15 +40,18 @@ const onSendMessage = async () => {
       </ConversationSelector>
 
       <div class="flex-1 flex justify-center w-full bg-neutral-700 text-white">
-        <div class="w-full flex flex-col">
-          <div class="flex-1 w-full overflow-x-hidden">
+        <div class="relative w-full flex flex-col">
+          <div class="top-0 bottom-0 left-0 right-0 w-full overflow-x-hidden pb-40">
             <NuxtPage />
           </div>
-          <div class="flex justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
-            <ConversationInput v-model:value="message" @send="onSendMessage" />
+          <div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-neutral-700 from-50% to-transparent">
+            <div class="flex justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
+              <ConversationInput v-model:value="message" @send="onSendMessage" />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </NuxtLayout>
 </template>
+

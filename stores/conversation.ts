@@ -14,6 +14,7 @@ export const useConversataionStore = defineStore('conversation', {
     
   actions: {
     async send(input: string, conversationId?: string, storeId?: string) {
+      let prompt: any[] = [] 
       const data = await $fetch('/api/messages', { method: 'post', body: { input, conversationId, authorRole: AuthorRole.USER } })
 
       if (conversationId) { 
@@ -26,9 +27,17 @@ export const useConversataionStore = defineStore('conversation', {
 
       if (storeId) {
         const sentences = await $fetch(`/api/stores/${storeId}/sentences`)
+
+        const vectors: number[][] = (() => {
+          try { return sentences.map(({ vectors }) => JSON.parse(vectors)) } catch { return [] }
+        })()
+
+        const [{ embedding: src }]= (await createEmbeddings(input)).data
+
+        prompt = calcTopEmbeddingsIndex(src, vectors).map((index) => sentences[index])
       }
 
-      const { choices } = await chatCompletions(this.conversations[data.conversationId].filter(({ authorRole }) => isUserAuthorRole(authorRole)).map(({ content }) => ({
+      const { choices } = await chatCompletions([...prompt, ...this.conversations[data.conversationId].filter(({ authorRole }) => isUserAuthorRole(authorRole))].map(({ content }) => ({
         role: 'user',
         content
       })))

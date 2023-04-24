@@ -1,5 +1,5 @@
 <template>
-  <Avatar color="#19c37d">
+  <Avatar color="#10a37f">
     A
   </Avatar>
 </template>

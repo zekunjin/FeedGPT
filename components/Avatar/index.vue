@@ -2,11 +2,11 @@
 withDefaults(defineProps<{
   color: string
   size?: number
-}>(), { size: 36 }) 
+}>(), { size: 30 }) 
 </script>
 
 <template>
-  <div :style="{ width: `${size}px`, height: `${size}px`, background: color }" class="rounded text-white flex items-center justify-center shadow text-sm">
+  <div :style="{ width: `${size}px`, height: `${size}px`, background: color }" class="rounded-sm text-white flex items-center justify-center shadow text-sm">
     <slot />
   </div>
 </template>

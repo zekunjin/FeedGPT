@@ -15,7 +15,7 @@ getConversationMessages(conversationId.value)
     <div v-for="item, index in conversations[conversationId]" :key="index" :class="{ 'bg-neutral-600': !isUserAuthorRole(item.authorRole) }">
       <div class="flex gap-4 py-4 max-w-3xl mx-auto px-8">
         <component :is="isUserAuthorRole(item.authorRole) ? AvatarQuestion : AvatarAnswer" class="shrink-0" />
-        <div class="py-1 px-4 rounded-lg leading-7 text-white/80">
+        <div class="py-1 px-4 rounded-lg leading-6 text-white/80">
           {{ item.content }}
         </div>
       </div>

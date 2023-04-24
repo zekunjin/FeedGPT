@@ -38,10 +38,11 @@ export interface CreateEmbeddingsResponse {
 }
 
 export const chatCompletions = async (messages: ChatCompletionMessage[]) => {
+  const apiKey = await storage.getItem(StorageKey.OPENAI_API_KEY)
   const data: ChatCompletionResponse = await $fetch('/v1/chat/completions', {
     baseURL: OPENAI_BASE_URL,
     method: 'post',
-    headers: { Authorization: "Bearer " + process.env.OPENAI_API_KEY },
+    headers: { Authorization: `Bearer ${apiKey}` },
     body: {
       model: 'gpt-3.5-turbo',
       messages
@@ -53,10 +54,11 @@ export const chatCompletions = async (messages: ChatCompletionMessage[]) => {
 
 
 export const createEmbeddings = async (input: string | string[]) => {
+  const apiKey = await storage.getItem(StorageKey.OPENAI_API_KEY)
   const data: CreateEmbeddingsResponse = await $fetch('/v1/embeddings', {
     baseURL: OPENAI_BASE_URL,
     method: 'post',
-    headers: { Authorization: "Bearer " + process.env.OPENAI_API_KEY },
+    headers: { Authorization: `Bearer ${apiKey}` },
     body: {
       model: 'text-embedding-ada-002',
       input
