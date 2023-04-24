@@ -6,7 +6,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div :style="{ width: `${size}px`, height: `${size}px`, background: color }" class="rounded-sm text-white flex items-center justify-center shadow text-sm">
+  <div :style="{ width: `${size}px`, height: `${size}px`, background: color }" class="rounded-sm text-white flex items-center justify-center shadow text-sm select-none">
     <slot />
   </div>
 </template>
