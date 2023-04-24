@@ -26,9 +26,10 @@ const onSendMessage = async () => {
   const params = message.value
   message.value = ''
   const data = await send(params, route.params.id as string, route.query.storeId as string)
-  if (!conversationId.value) { execute() }
-  router.push({ name: 'chat-id', params: { id: data.conversationId } })
-  
+  if (!conversationId.value) {
+    router.push({ name: 'chat-id', params: { id: data.conversationId } })
+    execute()
+  }
 }
 </script>
 

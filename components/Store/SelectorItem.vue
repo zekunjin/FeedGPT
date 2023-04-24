@@ -34,7 +34,7 @@ const toggleEdit = () => {
 <template>
   <div class="p-3 rounded cursor-pointer duration-300 flex justify-between items-center" :class="{ 'bg-white/10': isActive, 'hover:bg-white/5': !isActive }" @click="emit('click')">
     <div class="text-sm h-6">
-      <div v-if="!isEdit">
+      <div v-if="!isEdit" class="w-36 truncate">
         {{ name }}
       </div>
 

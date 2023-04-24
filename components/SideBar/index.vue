@@ -6,6 +6,11 @@ import Settings from '~icons/carbon/settings'
 const route = useRoute()
 const router = useRouter()
 
+const isEdit = ref(false)
+const apiKey = ref('')
+
+console.log(await storage.getItem(StorageKey.OPENAI_API_KEY))
+
 const menus = [
   { icon: Chat, key: 'chat' },
   { icon: Archive, key: 'store' }
@@ -13,6 +18,12 @@ const menus = [
 
 const isActive = ({ key }: { key: string }) => {
   return route.name?.toString().includes(key)
+}
+
+const toggleEdit = async () => {
+  isEdit.value = !isEdit.value
+  if (isEdit.value) { apiKey.value = (await storage.getItem(StorageKey.OPENAI_API_KEY)) as string }
+  if (!isEdit.value) { await storage.setItem(StorageKey.OPENAI_API_KEY, apiKey.value) }
 }
 </script>
 
@@ -25,7 +36,8 @@ const isActive = ({ key }: { key: string }) => {
     </div>
 
     <div class="flex justify-center">
-      <Settings class="cursor-pointer hover:rotate-90 duration-300" />
+      <Settings class="cursor-pointer hover:rotate-90 duration-300" @click="toggleEdit" />
+      <input v-show="isEdit" v-model="apiKey" placeholder="Enter api key" />
     </div>
   </div>
 </template>
