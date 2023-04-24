@@ -11,7 +11,7 @@ getConversationMessages(conversationId.value)
 </script>
 
 <template>
-  <div class="flex flex-col select-none pb-8 w-full">
+  <div class="flex flex-col pb-8 w-full">
     <div v-for="item, index in conversations[conversationId]" :key="index" :class="{ 'bg-neutral-600': !isUserAuthorRole(item.authorRole) }">
       <div class="flex gap-4 py-4 max-w-3xl mx-auto px-8">
         <component :is="isUserAuthorRole(item.authorRole) ? AvatarQuestion : AvatarAnswer" class="shrink-0" />
