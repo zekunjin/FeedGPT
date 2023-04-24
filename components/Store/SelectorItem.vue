@@ -39,7 +39,7 @@ const toggleEdit = () => {
       </div>
 
       <div v-if="isEdit">
-        <input v-model="inputName" class="bg-transparent focus-visible:outline-none">
+        <input v-model="inputName" autofocus="true" class="bg-transparent focus-visible:outline-none">
       </div>
     </div>
 
