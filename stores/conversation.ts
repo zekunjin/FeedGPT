@@ -50,6 +50,12 @@ export const useConversataionStore = defineStore('conversation', {
       return data
     },
 
+    async regenerateResponse(conversationId: string) {
+      const c = this.conversations[conversationId]
+      if (!c) { return }
+      const s = c.filter(({ authorRole }) => isUserAuthorRole(authorRole)).at(-1)
+    },
+
     async getConversationMessages(conversationId: string) {
       this.conversations[conversationId] = (await $fetch(`/api/conversations/${conversationId}/messages`)).map(({ content, authorRole }) => ({
         content,
