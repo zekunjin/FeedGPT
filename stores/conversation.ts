@@ -34,13 +34,13 @@ export const useConversataionStore = defineStore('conversation', {
 
         const [{ embedding: src }]= (await createEmbeddings(input)).data
 
-        prompt = calcTopEmbeddingsIndex(src, vectors, 3).map((index) => sentences[index])
+        prompt = calcTopEmbeddingsIndex(src, vectors, 1).map((index) => sentences[index])
       }
 
-      const { choices } = await chatCompletions([...prompt, ...this.conversations[data.conversationId].filter(({ authorRole }) => isUserAuthorRole(authorRole))].map(({ content }) => ({
-        role: 'user',
-        content
-      })))
+      const systems = prompt.map(({ content }) => ({ role: AuthorRole.ASSISTANT, content }))
+      const users = this.conversations[data.conversationId].filter(({ authorRole }) => isUserAuthorRole(authorRole)).map(({ content }) => ({ role: AuthorRole.USER, content }))
+
+      const { choices } = await chatCompletions([...systems, ...users])
 
       const [choice] = choices
 

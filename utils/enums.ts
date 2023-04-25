@@ -1,6 +1,7 @@
 export enum AuthorRole {
   USER = 'user',
-  SYSTEM = 'system'
+  SYSTEM = 'system',
+  ASSISTANT = 'assistant'
 }
 
 export enum StorageKey {
