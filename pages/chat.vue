@@ -21,6 +21,8 @@ const onDeleteConversation = async ({ id }: { id: string }) => {
   execute()
 }
 
+const onRegenerateResponse = () => {}
+
 const onSendMessage = async () => {
   if (!message.value) { return }
   const params = message.value
@@ -46,7 +48,8 @@ const onSendMessage = async () => {
             <NuxtPage />
           </div>
           <div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-neutral-700 from-50% to-transparent">
-            <div class="flex justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
+            <div class="flex flex-col items-center justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
+              <ConversationRegenerateResponseBtn class="mb-2" @click="onRegenerateResponse" />
               <ConversationInput v-model:value="message" @send="onSendMessage" />
             </div>
           </div>
