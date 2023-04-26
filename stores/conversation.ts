@@ -61,7 +61,7 @@ export const useConversataionStore = defineStore('conversation', {
 
         const [{ embedding: src }]= (await createEmbeddings(input)).data
     
-        prompt = calcTopEmbeddingsIndex(src, vectors, 1).map((index) => sentences[index])
+        prompt = calcTopEmbeddingsIndex(src, vectors, 3).map((index) => sentences[index])
       }
 
       const systems = prompt.map(({ content }: any) => ({ role: AuthorRole.ASSISTANT, content }))

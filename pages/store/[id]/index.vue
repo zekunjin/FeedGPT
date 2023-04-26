@@ -12,7 +12,7 @@ const inputSentences = ref<Record<string, string>>({})
 const { data, execute } = useLazyFetch(`/api/stores/${storeId.value}/sentences`)
 
 const onImport = async () => {
-  const arr = text.value.split('。').filter(Boolean)
+  const arr = text.value.split('\n').filter(Boolean)
   text.value = ''
   const { data } = await createEmbeddings(arr)
   useFetch('/api/sentences', {
