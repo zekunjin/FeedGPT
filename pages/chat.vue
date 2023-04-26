@@ -6,9 +6,10 @@ const route = useRoute()
 const router = useRouter()
 
 const { data, execute } = useLazyFetch('/api/conversations')
-const { send } = useConversataionStore()
+const { send, regenerateResponse } = useConversataionStore()
 
 const conversationId = computed(() => route.params.id as string | undefined)
+const storeId = computed(() => route.query.storeId as string | undefined)
 
 const isActive = (id: string) => id === conversationId.value
 
@@ -22,13 +23,16 @@ const onDeleteConversation = async ({ id }: { id: string }) => {
   execute()
 }
 
-const onRegenerateResponse = () => {}
+const onRegenerateResponse = () => {
+  if (!conversationId.value) { return }
+  regenerateResponse(conversationId.value, storeId.value)
+}
 
 const onSendMessage = async () => {
   if (!message.value) { return }
   const params = message.value
   message.value = ''
-  const data = await send(params, route.params.id as string, route.query.storeId as string)
+  const data = await send(params, conversationId.value, storeId.value)
   if (!conversationId.value) {
     router.push({ name: 'chat-id', params: { id: data.conversationId } })
     execute()
