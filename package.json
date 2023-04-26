@@ -21,6 +21,7 @@
   "dependencies": {
     "@prisma/client": "4.13.0",
     "@tensorflow/tfjs": "^4.4.0",
+    "gsap": "^3.11.5",
     "prisma": "^4.13.0",
     "unstorage": "^1.5.0"
   }

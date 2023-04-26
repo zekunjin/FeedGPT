@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { gsap } from 'gsap'
 const message = ref('')
 
 const route = useRoute()
@@ -33,6 +34,10 @@ const onSendMessage = async () => {
     execute()
   }
 }
+onMounted(() => {
+  gsap.fromTo(".regenerate", { y: 30 }, { y: -10,opacity:1 });
+  gsap.fromTo(".input", { y: 40 }, { y: 0, });
+})
 </script>
 
 <template>
@@ -49,8 +54,8 @@ const onSendMessage = async () => {
           </div>
           <div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-neutral-700 from-50% to-transparent">
             <div class="flex flex-col items-center justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
-              <ConversationRegenerateResponseBtn class="mb-2" @click="onRegenerateResponse" />
-              <ConversationInput v-model:value="message" @send="onSendMessage" />
+              <ConversationRegenerateResponseBtn class="regenerate opacity-0 mb-2" @click="onRegenerateResponse" />
+              <ConversationInput class="input" v-model:value="message" @send="onSendMessage" />
             </div>
           </div>
         </div>
