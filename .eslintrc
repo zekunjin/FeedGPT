@@ -1,5 +1,5 @@
 {
-  "extends": ["@nuxtjs/eslint-config-typescript"],
+  "extends": "@nuxtjs/eslint-config-typescript",
   "rules": {
     "unicorn/error-message": "off",
     "import/default": "off",

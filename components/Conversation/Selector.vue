@@ -12,7 +12,7 @@ const router = useRouter()
       New chat
     </ConversationNewBtn>
 
-    <div class="flex-1 overflow-y-auto flex flex-col gap-1 pt-3">
+    <div class="flex-1 overflow-y-auto flex flex-col gap-1">
       <slot />
     </div>
   </div>

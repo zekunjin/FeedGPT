@@ -2,7 +2,6 @@
 import Edit from '~icons/carbon/edit'
 import EditOff from '~icons/carbon/edit-off'
 import TrashCan from '~icons/carbon/trash-can'
-import { gsap } from 'gsap'
 
 const props = withDefaults(defineProps<{
   title: string,
@@ -13,6 +12,7 @@ const emit = defineEmits(['click', 'delete', 'save', 'update:title'])
 
 const isEdit = ref(false)
 const inputTitle = ref('')
+const selectorItemRef = ref(null)
 
 watch(() => props.isActive, (value) => {
   if (!value) { isEdit.value = false }
@@ -30,23 +30,10 @@ const toggleEdit = () => {
     emit('update:title', inputTitle.value)
   }
 }
-onMounted(() => {
-  gsap.to(".selecter-item", {
-    y: -12,
-    yoyo: true,
-    ease: "power1.in",
-    direction: 0.5,
-    opacity: 1,
-    stagger: {
-      amount: 0.3,
-      grid: "auto",
-    }
-  });
-})
 </script>
 
 <template>
-  <div class="selecter-item opacity-0 p-3 rounded cursor-pointer duration-300 flex justify-between items-center" :class="{ 'bg-white/10': isActive, 'hover:bg-white/5': !isActive }" @click="emit('click')">
+  <div class="p-3 rounded cursor-pointer duration-300 flex justify-between items-center" :class="{ 'bg-white/10': isActive, 'hover:bg-white/5': !isActive }" @click="emit('click')">
     <div class="text-sm h-6">
       <div v-if="!isEdit" class="w-36 truncate">
         {{ title }}
