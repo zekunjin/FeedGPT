@@ -6,7 +6,8 @@ const route = useRoute()
 const router = useRouter()
 
 const selectorItemRefs = ref([])
-const messageContainerRef = ref<HTMLInputElement | null>(null)
+const regenBtnRef = ref(null)
+const inputRef = ref(null)
 const { data, execute } = useLazyFetch('/api/conversations')
 const { send, regenerateResponse } = useConversataionStore()
 
@@ -42,22 +43,14 @@ const onSendMessage = async () => {
 }
 onMounted(async () => {
   await nextTick()
-  if (messageContainerRef.value) {
-    gsap.from(messageContainerRef.value.children, {
-      y: 12,
-      yoyo: true,
-      opacity: 0,
-      stagger: {
-        amount: 0.3,
-        grid: "auto",
-      }
-    })
-  }
+  gsap.from(inputRef.value, { y: 8, opacity: 0 })
+  gsap.from(regenBtnRef.value, { opacity: 0, delay: 0.4 })
+    
   gsap.from(selectorItemRefs.value, {
     y: 12,
     opacity: 0,
     stagger: {
-      amount: 0.3,
+      amount: 0.2,
       grid: "auto",
     }
   })
@@ -80,8 +73,13 @@ onMounted(async () => {
           </div>
           <div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-neutral-700 from-50% to-transparent">
             <div ref="messageContainerRef" class="flex flex-col items-center justify-center py-14 mx-auto md:w-full lg:max-w-3xl px-8">
-              <ConversationRegenerateResponseBtn class="mb-2" @click="onRegenerateResponse" />
-              <ConversationInput v-model:value="message" @send="onSendMessage" />
+              <div ref="regenBtnRef" class="mb-2">
+                <ConversationRegenerateResponseBtn @click="onRegenerateResponse" />
+              </div>
+              
+              <div ref="inputRef" class="w-full">
+                <ConversationInput v-model:value="message" @send="onSendMessage" />
+              </div>
             </div>
           </div>
         </div>
