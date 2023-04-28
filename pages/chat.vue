@@ -44,8 +44,10 @@ onMounted(async () => {
   await nextTick()
   if (messageContainerRef.value) {
     gsap.from(messageContainerRef.value.children, {
-      y: 100, yoyo: true, opacity: 0, ease: "power1.in",
-      direction: 0.5, stagger: {
+      y: 12,
+      yoyo: true,
+      opacity: 0,
+      stagger: {
         amount: 0.3,
         grid: "auto",
       }
@@ -53,9 +55,6 @@ onMounted(async () => {
   }
   gsap.from(selectorItemRefs.value, {
     y: 12,
-    yoyo: true,
-    ease: "power1.in",
-    direction: 0.5,
     opacity: 0,
     stagger: {
       amount: 0.3,
