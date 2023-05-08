@@ -44,13 +44,13 @@ const onSendMessage = async () => {
 onMounted(async () => {
   await nextTick()
   gsap.from(inputRef.value, { y: 8, opacity: 0 })
-  gsap.from(regenBtnRef.value, { opacity: 0, delay: 0.4 })
+  gsap.from(regenBtnRef.value, { opacity: 0, delay: 0.3 })
     
   gsap.from(selectorItemRefs.value, {
     y: 12,
     opacity: 0,
     stagger: {
-      amount: 0.2,
+      amount: 0.3,
       grid: "auto",
     }
   })
