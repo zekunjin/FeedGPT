@@ -45,13 +45,13 @@ onMounted(async () => {
   await nextTick()
   gsap.from(inputRef.value, { y: 8, opacity: 0 })
   gsap.from(regenBtnRef.value, { opacity: 0, delay: 0.3 })
-    
+
   gsap.from(selectorItemRefs.value, {
     y: 12,
     opacity: 0,
     stagger: {
       amount: 0.3,
-      grid: "auto",
+      grid: 'auto'
     }
   })
 })
@@ -61,9 +61,9 @@ onMounted(async () => {
   <NuxtLayout>
     <div class="flex h-full w-full">
       <ConversationSelector>
-      <div v-for="item in data" :key="item.id" ref="selectorItemRefs">
-        <ConversationSelectorItem v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id }, query: { storeId: item.storeId } })" @save="onSaveConversation($event, item)" @delete="onDeleteConversation(item)" />
-      </div>
+        <div v-for="item in data" :key="item.id" ref="selectorItemRefs">
+          <ConversationSelectorItem v-model:title="item.title" :is-active="isActive(item.id)" @click="router.push({ name: 'chat-id', params: { id: item.id }, query: { storeId: item.storeId } })" @save="onSaveConversation($event, item)" @delete="onDeleteConversation(item)" />
+        </div>
       </ConversationSelector>
 
       <div class="flex-1 flex justify-center w-full bg-neutral-700 text-white">
@@ -76,7 +76,7 @@ onMounted(async () => {
               <div ref="regenBtnRef" class="mb-2">
                 <ConversationRegenerateResponseBtn @click="onRegenerateResponse" />
               </div>
-              
+
               <div ref="inputRef" class="w-full">
                 <ConversationInput v-model:value="message" @send="onSendMessage" />
               </div>
@@ -87,4 +87,3 @@ onMounted(async () => {
     </div>
   </NuxtLayout>
 </template>
-

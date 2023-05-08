@@ -24,6 +24,7 @@
     "eslint": "^8.38.0",
     "nuxt": "^3.4.2",
     "typescript": "^5.0.4",
+    "un19n": "^0.0.9",
     "unplugin-icons": "^0.16.1"
   }
 }
