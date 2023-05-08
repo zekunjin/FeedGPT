@@ -7,6 +7,8 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['update:value', 'send'])
 
+const { t } = useI18n()
+
 const v = computed({
   get () {
     return props.value
@@ -25,9 +27,9 @@ const onSend = () => {
   <div class="relative w-full">
     <input
       v-model="v"
-      placeholder="Send a messasge ..."
+      :placeholder="t('en:Send a messasge ...')"
       class="block w-full border-gray-300 shadow text-base rounded-lg pl-4 pr-12 py-3 bg-neutral-500 hover:shadow-lg focus:shadow-lg focus-visible:outline-none duration-300"
-    />
+    >
 
     <SendAlt class="absolute right-4 bottom-1/2 translate-y-1/2 cursor-pointer" @click="onSend" />
   </div>
