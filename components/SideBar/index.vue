@@ -9,8 +9,6 @@ const router = useRouter()
 const isEdit = ref(false)
 const apiKey = ref('')
 
-console.log(await storage.getItem(StorageKey.OPENAI_API_KEY))
-
 const menus = [
   { icon: Chat, key: 'chat' },
   { icon: Archive, key: 'store' }

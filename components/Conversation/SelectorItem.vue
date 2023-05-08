@@ -12,6 +12,7 @@ const emit = defineEmits(['click', 'delete', 'save', 'update:title'])
 
 const isEdit = ref(false)
 const inputTitle = ref('')
+const selectorItemRef = ref(null)
 
 watch(() => props.isActive, (value) => {
   if (!value) { isEdit.value = false }
