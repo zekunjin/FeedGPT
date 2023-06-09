@@ -2,7 +2,7 @@
 withDefaults(defineProps<{
   color: string
   size?: number
-}>(), { size: 30 }) 
+}>(), { size: 30 })
 </script>
 
 <template>

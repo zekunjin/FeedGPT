@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.16",
+    "@nuxt/devtools": "^0.5.5",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@pinia/nuxt": "^0.4.9",
